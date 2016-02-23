@@ -1014,6 +1014,26 @@ define([
       });
   };
 
+  /**
+   * Verify a linked email
+   *
+   * @method verifyLinkedEmail
+   * @param {String} uid Account ID
+   * @param {String} email
+   * @param {String} code Verification code
+   * @return {Promise} A promise that will be fulfilled with JSON `xhr.responseText` of the request
+   */
+  FxAccountClient.prototype.verifyLinkedEmail = function (uid, email, code) {
+    required(uid, 'uid');
+    required(email, 'email');
+    required(code, 'verify code');
+
+    return this.request.send('/account/linked_email/verify_code', 'POST', null, {
+      uid: uid,
+      email: email,
+      code: code
+    });
+  };
 
   return FxAccountClient;
 });
